@@ -3,6 +3,8 @@ const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
 const crypto = require('crypto')
 const config = require('../config.js')
+const path = require('path')
+const fs = require('fs')
 
 
 var getRequestObject = function (req, data){
@@ -146,11 +148,30 @@ var createRandomString = function(strLength){
   }
 }
 
+var getTemplate = function(templateName, callback){
+  templateName = typeof(templateName) === 'string' && templateName.length > 0 ? templateName : false
+  if(templateName){
+    let templateDir = path.join(__dirname, '../public/templates/')
+    fs.readFile(templateDir + templateName + '.html', 'utf-8', (err, str) =>{
+      if(!err && str && str.length > 0){
+        callback(false, str)
+      }
+      else {
+        callback(true, `Template ${templateName} is not found`)
+      }
+    })
+  }
+  else{
+    callback(true, `Template ${templateName} is not a valid template`)
+  }
+}
+
 
 module.exports = {
   getRequestObject,
   hash,
   parseJsonToObj,
   checkRequest,
-  createRandomString
+  createRandomString,
+  getTemplate
 }

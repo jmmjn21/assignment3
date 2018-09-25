@@ -25,12 +25,22 @@ const middleware = function (req, res) {
   req.on('end', () =>{
     reqObject = utils.getRequestObject(req, body)
     const chosenHandler =  router[choseRouter(reqObject.path)]
-    chosenHandler(reqObject, (statusCode, response) =>{
+    chosenHandler(reqObject, (statusCode, response, contentType) =>{
       statusCode = typeof(statusCode) === 'number' ? statusCode : 400
-      response = typeof(response) === 'object' ? response : {}
-      res.setHeader('Content-Type', 'application/json')
+      contentType = typeof(contentType) === 'string' ? contentType : 'json'
+      let payload = ''
+
+      if(contentType === 'json'){
+        payload = typeof(response) === 'object' ? response : {}
+        res.setHeader('Content-Type', `application/${contentType}`)
+        payload = JSON.stringify(payload)
+      }
+      else if(contentType === 'html'){
+        payload = typeof(response) === 'string' ? response : ''
+        res.setHeader('Content-Type', `text/${contentType}`)
+      }
       res.writeHead(statusCode)
-      res.end(JSON.stringify(response))
+      res.end(payload)
     })
   })
 }
