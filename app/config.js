@@ -40,7 +40,13 @@ myEnvs.dev = {
     domain: '********.com',
     apiKey: '***********-0e6e8cad-3cd17d86'
   },
-  secret: 'test'
+  secret: 'test',
+  templateGlobals: {
+    appName: 'chacker',
+    companyName: 'Mansilla S.L.',
+    yearCreated: '1986',
+    baseUrl: 'http://localhost:3000/'
+  }
 }
 
 myEnvs.pro = {
@@ -82,7 +88,13 @@ myEnvs.pro = {
     domain: '********.com',
     apiKey: '**********-***-**'
   },
-  secret: 'testPro'
+  secret: 'testPro',
+  templateGlobals: {
+    appName: 'chacker',
+    companyName: 'Mansilla S.L.',
+    yearCreated: '1986',
+    baseUrl: 'http://localhost:5000/'
+  }
 }
 
 const environment = typeof(process.env.NODE_ENV) === 'string' ? process.env.NODE_ENV.toLowerCase() : ''
