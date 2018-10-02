@@ -176,7 +176,7 @@ var addUniversaltemplate = function(str, data, callback){
     if(!err && headerString){
       getTemplate('_footer', data, (err, footerString) =>{
         if(!err && footerString){
-          let fullString = headerString + footerString
+          let fullString = headerString + str + footerString
           callback(false, fullString)
         }
         else{
