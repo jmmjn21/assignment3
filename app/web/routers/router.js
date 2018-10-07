@@ -1,5 +1,5 @@
 
-const main = require('../web/controllers/main.js')
+const main = require('../controllers/main.js')
 
 
 const routers = {

@@ -2,8 +2,8 @@
 const http = require('http')
 const config = require('./config.js')
 const utils = require('./api/helpers/utils.js')
-const router = require('./routers/router.js')
-const viewRouter = require('./routers/viewRouter.js')
+const router = require('./api/routers/router.js')
+const viewRouter = require('./web/routers/router.js')
 
 
 const server = http.createServer((req, res) =>{
