@@ -70,8 +70,27 @@ var interpolate = function(str, data){
 
 }
 
+var getStaticAsset = function(fileName, callback){
+  fileName = typeof(fileName) === 'string' && fileName.length > 0 ? fileName : false
+  if(fileName){
+    let publicDir = path.join(__dirname, '../public/')
+    fs.readFile(publicDir + fileName, (err, data) =>{
+      if(!err){
+        callback(false, data)
+      }
+      else {
+        callback(true, `File ${fileName} not found`)
+      }
+    })
+  }
+  else{
+    callback(true, `File ${fileName} is not a valid file`)
+  }
+}
+
 
 module.exports = {
   getTemplate,
-  addUniversaltemplate
+  addUniversaltemplate,
+  getStaticAsset
 }

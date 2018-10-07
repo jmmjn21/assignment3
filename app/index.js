@@ -40,6 +40,26 @@ const middleware = function (req, res) {
         payload = typeof(response) === 'string' ? response : ''
         res.setHeader('Content-Type', `text/${contentType}`)
       }
+      else if(contentType === 'favicon'){
+        payload = typeof(response) !== 'undefined' ? response : ''
+        res.setHeader('Content-Type', `image/x-icon`)
+      }
+      else if(contentType === 'css'){
+        payload = typeof(response) !== 'undefined' ? response : ''
+        res.setHeader('Content-Type', `text/css`)
+      }
+      else if(contentType === 'png'){
+        payload = typeof(response) !== 'undefined' ? response : ''
+        res.setHeader('Content-Type', `image/png`)
+      }
+      else if(contentType === 'jpg'){
+        payload = typeof(response) !== 'undefined' ? response : ''
+        res.setHeader('Content-Type', `image/jpg`)
+      }
+      else if(contentType === 'plain'){
+        payload = typeof(response) !== 'undefined' ? response : ''
+        res.setHeader('Content-Type', `text/plain`)
+      }
       res.writeHead(statusCode)
       res.end(payload)
     })
@@ -57,6 +77,9 @@ var choseRouter = function(path){
   else{
     operationNames = Object.keys(viewRouter)
     myRouter = viewRouter
+    if(path.indexOf('public/') > -1){
+      return myRouter.public
+    }
   }
   operationNames.map(name =>{
     if(path.indexOf(name) >= 0){
