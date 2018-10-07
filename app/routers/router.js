@@ -11,10 +11,10 @@ const routers = {
   'hello': main.hello,
   'notFound': main.notFound,
   //Services
-  'users': users.users,
-  'tokens': tokens.tokens,
-  'menus': menus.menus,
-  'orders': orders.orders
+  'api/users': users.users,
+  'api/tokens': tokens.tokens,
+  'api/menus': menus.menus,
+  'api/orders': orders.orders
 }
 
 module.exports = routers

@@ -9,7 +9,7 @@ var getTemplate = function(templateName, data, callback){
   templateName = typeof(templateName) === 'string' && templateName.length > 0 ? templateName : false
   data = typeof(data) === 'object'  && data != null ? data : {}
   if(templateName){
-    let templateDir = path.join(__dirname, '../public/templates/')
+    let templateDir = path.join(__dirname, '../templates/')
     fs.readFile(templateDir + templateName + '.html', 'utf-8', (err, str) =>{
       if(!err && str && str.length > 0){
         callback(false, interpolate(str, data))

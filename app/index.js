@@ -3,6 +3,7 @@ const http = require('http')
 const config = require('./config.js')
 const utils = require('./api/helpers/utils.js')
 const router = require('./routers/router.js')
+const viewRouter = require('./routers/viewRouter.js')
 
 
 const server = http.createServer((req, res) =>{
@@ -24,7 +25,7 @@ const middleware = function (req, res) {
 
   req.on('end', () =>{
     reqObject = utils.getRequestObject(req, body)
-    const chosenHandler =  router[choseRouter(reqObject.path)]
+    const chosenHandler =  choseRouter(reqObject.path)
     chosenHandler(reqObject, (statusCode, response, contentType) =>{
       statusCode = typeof(statusCode) === 'number' ? statusCode : 400
       contentType = typeof(contentType) === 'string' ? contentType : 'json'
@@ -46,12 +47,21 @@ const middleware = function (req, res) {
 }
 
 var choseRouter = function(path){
-  const operationNames = Object.keys(router)
-  let myRoute = 'notFound' //default
+  let operationNames
+  let myRouter
+  let routeName = 'not found'
+  if(path.indexOf(config.backend) >= 0){
+    operationNames = Object.keys(router)
+    myRouter = router
+  }
+  else{
+    operationNames = Object.keys(viewRouter)
+    myRouter = viewRouter
+  }
   operationNames.map(name =>{
     if(path.indexOf(name) >= 0){
-      myRoute = name
+      routeName = name
     }
   })
-  return myRoute
+  return myRouter[routeName]
 }

@@ -1,5 +1,5 @@
 
-const utils = require('../../helpers/utils.js')
+const utils = require('../helpers/utils.js')
 const handlers = {}
 
 handlers.index = function(reqObj, callback){

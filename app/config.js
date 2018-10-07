@@ -3,22 +3,12 @@ const myEnvs = {};
 
 myEnvs.dev = {
   port: 3000,
-  templateGlobals: {
-    appName: 'chacker',
-    companyName: 'Mansilla S.L.',
-    yearCreated: '1986',
-    baseUrl: 'http://localhost:3000/'
-  }
+  backend: 'api'
 }
 
 myEnvs.pro = {
   port: 5000,
-  templateGlobals: {
-    appName: 'chacker',
-    companyName: 'Mansilla S.L.',
-    yearCreated: '1986',
-    baseUrl: 'http://localhost:5000/'
-  }
+  backend: 'api'
 }
 
 const environment = typeof(process.env.NODE_ENV) === 'string' ? process.env.NODE_ENV.toLowerCase() : ''
