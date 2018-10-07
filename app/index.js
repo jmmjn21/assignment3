@@ -1,7 +1,7 @@
 
 const http = require('http')
 const config = require('./config.js')
-const utils = require('./helpers/utils.js')
+const utils = require('./api/helpers/utils.js')
 const router = require('./routers/router.js')
 
 
@@ -45,7 +45,7 @@ const middleware = function (req, res) {
   })
 }
 
-const choseRouter = function(path){
+var choseRouter = function(path){
   const operationNames = Object.keys(router)
   let myRoute = 'notFound' //default
   operationNames.map(name =>{
