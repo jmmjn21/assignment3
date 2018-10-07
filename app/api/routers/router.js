@@ -8,7 +8,7 @@ const orders = require('../controllers/orders.js')
 
 
 const routers = {
-  'hello': main.hello,
+  'api/hello': main.hello,
   'notFound': main.notFound,
   //Services
   'api/users': users.users,
