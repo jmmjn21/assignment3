@@ -1,6 +1,6 @@
 
 const myServer = require('./server.js')
-const cli = require('./cli.js')
+const cli = require('./cli/cli.js')
 
 let app = {}
 
