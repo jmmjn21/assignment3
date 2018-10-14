@@ -8,7 +8,7 @@ class _events extends events{}
 
 let e = new _events()
 
-const responders = require('./responders/responders.js')
+const responders = require('./responders/main.js')
 
 const cli = {}
 
