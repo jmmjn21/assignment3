@@ -88,4 +88,19 @@ lib.delete = function(dir, file, callback){
   })
 }
 
+lib.list = function(dir, callback){
+  fs.readdir(`${baseDir}/${dir}/`, (err, data) =>{
+    if(!err){
+      let trimmedFileNames = []
+      data.forEach(function(fileName){
+        trimmedFileNames.push(fileName.replace('.json', ''))
+      })
+      callback(false, trimmedFileNames)
+    }
+    else{
+      callback(err, data)
+    }
+  })
+}
+
 module.exports = lib

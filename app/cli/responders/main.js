@@ -3,6 +3,7 @@
 const helper = require('../helpers/utils.js')
 const os = require('os')
 const v8 = require('v8')
+const _data = require('../../api/services/data.js')
 
 //responders
 const responders = {}
@@ -84,7 +85,19 @@ responders.stats = function(){
 }
 
 responders.listUsers = function(){
-  console.log('You asked for list Users')
+  _data.list('users', (err, userIds) =>{
+    if(!err && userIds.length > 0){
+      helper.verticalSpace()
+      userIds.map(userId =>{
+        _data.read('users', userId, (err, userData) =>{
+          if(!err && userData){
+            console.log(`Name: ${userData.name}, E-mail: ${userData.email}`)
+            helper.verticalSpace()
+          }
+        })
+      })
+    }
+  })
 }
 
 responders.moreUserInfo = function(str){
